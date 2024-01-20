@@ -2,7 +2,7 @@ const mineflayer = require("mineflayer");
 const { promisify } = require('util')
 const sleep = promisify(setTimeout)
 
-const interval = 4; //time in minutes
+const interval = 3; //time in minutes
 
 /**
  * @param {mineflayer.Bot} bot
