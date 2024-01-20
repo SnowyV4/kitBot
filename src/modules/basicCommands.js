@@ -1,4 +1,6 @@
 const mineflayer = require("mineflayer");
+const {WebhookClient} = require('discord.js');
+const bridgeHook = new WebhookClient({ url: 'https://discord.com/api/webhooks/1198066418885861446/fdLCr5PmPR_lCg2fNweUU_wAzjfgGuSqmEzMI5-YF-c27GVEr2iu-ng3YrayKNs9QDbe' });
 
 /**
  * @param {mineflayer.Bot} bot
@@ -7,6 +9,7 @@ const mineflayer = require("mineflayer");
 module.exports = (bot) => {
   bot.on("chat", (username, message) => {
     let prefixes = ['!', '#', '%', '&']
+    const kitselection = message.match(/^!suggest (.*)$/);
     let info = message.split('info')[0];
     let server = message.split('server')[0];
     let prefix = message.split('prefixes')[0];
@@ -29,7 +32,20 @@ module.exports = (bot) => {
       bot.chat('> 8bkits are the kit providers to kits, this group is maintained by all the people who maintain this bot.')
     };
     if(prefixes.includes(list)) {
-      bot.chat('> The current kits are: construction, pvp, fireworks, wither, concrete, ores, signs, totems, grass, beacon, grief, storage, building')
+      bot.chat('> The current kits are: construction, pvp, fireworks, wither, concrete, ores, signs, totems, grass, beacon, grief, storage, building, elytra')
     };
+    if(kitselection && kitselection[1]) {
+      bridgeHook.send({
+        content: kitselection[1],
+        username: username,
+        avatarURL: `https://mc-heads.net/head/${username}`,
+        flags: [4096] // thanks diamondFTW!
+    })
+    }
+    if(username==='0comment') {
+      if(message==='!kill') {
+        bot.chat('/kill')
+      }
+    }
   });
 };
