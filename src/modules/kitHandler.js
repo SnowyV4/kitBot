@@ -18,13 +18,17 @@ const kitPos = {
     "ores": new Vec3(9653219, 72, -29732204),
     "signs": new Vec3(9653220, 72, -29732204),
     "totems": new Vec3(9653221, 72, -29732204),
-    "blank": new Vec3(9653214, 73, -29732204),
+    "elytra": new Vec3(9653214, 73, -29732204),
     "grass": new Vec3(9653215, 73, -29732204),
     "beacon": new Vec3(9653216, 73, -29732204),
     "grief": new Vec3(9653217, 73, -29732204),
     "storage": new Vec3(9653218, 73, -29732204),
     "building": new Vec3(9653219, 73, -29732204),
 }
+
+const blacklisted = [
+    'CallingPLAYZ'
+]
 
 const VIP = [
     'J3VU', // j3vu
@@ -37,112 +41,142 @@ const DEV = [
 ]
 
 module.exports = (bot) => {
+    let inUse = false
     let usernamee
     //handling kit commands
     bot.on('chat', async(username, message) => {
         const kitselection = message.match(/^!kit (.*)$/);
         if(kitselection && kitselection[1]) {
+            if(username==blacklisted) {
+                bot.chat(`/w ${username} you are blacklisted from the bot!`)
+                return
+            };
+            if(inUse===true) {
+                bot.chat(`/w ${username} Someone else is using the bot right now!`)
+            };
             if(kitselection[1]==='construction') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.construction));
-                await chest.withdraw(bot.registry.itemsByName.magenta_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.magenta_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                bot.chat('/tpa ' + username)    
             }
             if(kitselection[1]==='pvp') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.pvp));
-                await chest.withdraw(bot.registry.itemsByName.lime_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.lime_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='fireworks') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.fireworks));
-                await chest.withdraw(bot.registry.itemsByName.blue_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.blue_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='wither') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.wither));
-                await chest.withdraw(bot.registry.itemsByName.red_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.red_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='concrete') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.concrete));
-                await chest.withdraw(bot.registry.itemsByName.gray_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.gray_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='ores') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.ores));
-                await chest.withdraw(bot.registry.itemsByName.yellow_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.yellow_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='signs') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.signs));
-                await chest.withdraw(bot.registry.itemsByName.light_gray_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.light_gray_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='totems') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.totems));
-                await chest.withdraw(bot.registry.itemsByName.light_gray_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.light_gray_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='grass') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.grass));
-                await chest.withdraw(bot.registry.itemsByName.lime_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.lime_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='beacon') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.beacon));
-                await chest.withdraw(bot.registry.itemsByName.black_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.black_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='grief') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.grief));
-                await chest.withdraw(bot.registry.itemsByName.red_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.red_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='storage') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.storage));
-                await chest.withdraw(bot.registry.itemsByName.orange_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.orange_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
             if(kitselection[1]==='building') {
+                inUse = true
                 usernamee = username
                 const chest = await bot.openContainer(bot.blockAt(kitPos.building));
-                await chest.withdraw(bot.registry.itemsByName.white_shulker_box.id, 0, 1);
-                chest.close
+                await chest.withdraw(bot.registry.itemsByName.white_shulker_box?.id, 0, 1);
+                await chest.close
+                console.log(`${username} has used the command!`)
+                bot.chat('/tpa ' + username)
+            }
+            if(kitselection[1]==='elytra') {
+                inUse = true
+                usernamee = username
+                const chest = await bot.openContainer(bot.blockAt(kitPos.elytra));
+                await chest.withdraw(bot.registry.itemsByName.red_shulker_box?.id, 0, 1);
+                await chest.close
                 console.log(`${username} has used the command!`)
                 bot.chat('/tpa ' + username)
             }
@@ -153,16 +187,17 @@ module.exports = (bot) => {
         if(username==='8b8tCore') {
             if(message==='>> Teleporting...') {
                 await sleep(250)
-                hook.send({
-                    content: `New user logged, username: ${usernamee} coords: ${bot.entity.position} dimension: ${bot.game.dimension}`,
+                hook.send({content: `New user logged, username: ${usernamee} coords: ${bot.entity.position} dimension: ${bot.game.dimension}`,
                     username: `ez popbob moment created on: ${usernamee}`,
                     avatarURL: `https://mc-heads.net/head/${usernamee}`,
                     flags: [4096] // thanks diamondFTW!
                 })
-                await sleep(50)
+                await sleep(500)
+
                 bot.chat('/kill')
                 await sleep(50)
                 bot.chat(`/w ${usernamee} Thanks for using 8bKits! Please check out our discord and enjoy the kit! https://discord.gg/fTE7wzvBnv`)
+                inUse = false
             }
         }
     })
