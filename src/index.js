@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const mineflayer = require("mineflayer");
 const { Client, IntentsBitField, GatewayIntentsBitField, EmbedBuilder, SlashCommandBuilder, PermissionsBitField, Permissions, messageLink } = require('discord.js');
+const internal = require("stream");
 const client = new Client({
   intents: [
       IntentsBitField.Flags.Guilds,
@@ -42,6 +43,7 @@ const OPTIONS = {
     version: '1.20.1'
 };
 
+
 function injectModules(bot) {
     const MODULES_DIRECTORY = path.join(__dirname, "modules");
     const modules = fs
@@ -51,7 +53,6 @@ function injectModules(bot) {
   
     bot.loadPlugins(modules);
 }
-
 const bot = mineflayer.createBot(OPTIONS);
 injectModules(bot)
 
@@ -79,11 +80,16 @@ client.on('interactionCreate', (interaction) => {
   if(interaction.commandName==='say') {
     const name = interaction.options.getString('text')
 
-    if (!interaction.member.roles.cache.has("1196192536126042172")) return interaction.reply('Missing role!')
-    if (interaction.member.roles.cache.has("1196192536126042172")) {
-      bot.chat(name)
-      interaction.reply('Sent!')
+    if(name.includes('/tpa')) {
+      interaction.reply('Bot contains something related to a TP!')
+      return
     }
+    if(name.includes('/tpayes')) {
+      interaction.reply('Bot contains something related to a TP!')
+      return
+    }
+    bot.chat(name)
+    interaction.reply('Sent!')
   };
 })
 
