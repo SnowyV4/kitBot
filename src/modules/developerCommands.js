@@ -1,0 +1,38 @@
+const mineflayer = require("mineflayer");
+const {WebhookClient} = require('discord.js');
+const bridgeHook = new WebhookClient({ url: 'https://discord.com/api/webhooks/1198817499353976923/3oyCUc1FcQ5FZkKr1-m5CEjPPPBFxci4qYFlcZ8z-gHZVA5EtNdAftWfysNdeYhm5yVS' });
+
+/**
+ * @param {mineflayer.Bot} bot
+ */
+
+const DEVS = [
+  "0comment",
+  "ItzFezy",
+  "basefind"
+]
+
+module.exports = (bot) => {
+    bot.on('chat', async(username, message) => {
+        const userToBlacklist = message.match(/^!blacklist (.*)$/);
+        if(!username===DEVS) return
+        bot.chat(`/ignore ${userToBlacklist[1]}`)
+        bridgeHook.send({
+            content: `Person blacklisted:`,
+            username: `Dev who blacklisted: ${username}`,
+            avatarURL: `https://mc-heads.net/head/${username}`,
+            flags: [4096] // thanks diamondFTW!
+        })
+    })
+    bot.on('chat', async(username, message) => {
+        const userToBlacklist = message.match(/^!unblacklist (.*)$/);
+        if(!username===DEVS) return
+        bot.chat(`/unignore ${userToBlacklist[1]}`)
+        bridgeHook.send({
+            content: `Person unblacklisted:`,
+            username: `Dev who unblacklisted: ${username}`,
+            avatarURL: `https://mc-heads.net/head/${username}`,
+            flags: [4096] // thanks diamondFTW!
+        })
+    })
+}
