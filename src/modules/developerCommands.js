@@ -23,6 +23,7 @@ module.exports = (bot) => {
             avatarURL: `https://mc-heads.net/head/${username}`,
             flags: [4096] // thanks diamondFTW!
         })
+        bot.chat(`/w ${userToBlacklist[1]} You have been blacklisted by: ${username}`)
     })
     bot.on('chat', async(username, message) => {
         const userToBlacklist = message.match(/^!unblacklist (.*)$/);
@@ -34,5 +35,6 @@ module.exports = (bot) => {
             avatarURL: `https://mc-heads.net/head/${username}`,
             flags: [4096] // thanks diamondFTW!
         })
+        bot.chat(`/w ${userToBlacklist[1]} You have been unblacklisted by: ${username}`)
     })
 }
