@@ -51,10 +51,10 @@ module.exports = (bot) => {
     };
     if(prefixes.includes(list)) {
       bot.chat(`/w ${username} The current kits are: construction, pvp, fireworks, wither, concrete, ores, signs, totems, grass, beacon, grief, storage, building, elytra, gaps, dyes, light, netherite`)
-      bot.chat(`/w ${username} cpvp/refill, trident, obsidian`)
+      bot.chat(`/w ${username} cpvp/refill, trident, obsidian, pearls, terracotta, stone-bricks`)
     };
     if(prefixes.includes(command)) {
-      bot.chat(`> The current commands are: !list, !kit, !prefixes, !credits, !server, !info, !suggest, !uses`)
+      bot.chat(`> The current commands are: !list, !kit, !prefixes, !credits, !server, !info, !suggest`)
     };
     if(kitselection && kitselection[1]) {
       bridgeHook.send({
