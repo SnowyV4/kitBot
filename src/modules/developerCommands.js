@@ -16,25 +16,29 @@ module.exports = (bot) => {
     bot.on('chat', async(username, message) => {
         const userToBlacklist = message.match(/^!blacklist (.*)$/);
         if(!username===DEVS) return
-        bot.chat(`/ignore ${userToBlacklist[1]}`)
-        bridgeHook.send({
-            content: `Person blacklisted:`,
+        if(kitselection && kitselection[1]) {
+            bot.chat(`/ignore ${userToBlacklist[1]}`)
+            bridgeHook.send({
+            content: `Person blacklisted: ${userToBlacklist[1]}`,
             username: `Dev who blacklisted: ${username}`,
             avatarURL: `https://mc-heads.net/head/${username}`,
             flags: [4096] // thanks diamondFTW!
         })
         bot.chat(`/w ${userToBlacklist[1]} You have been blacklisted by: ${username}`)
+        }
     })
     bot.on('chat', async(username, message) => {
         const userToBlacklist = message.match(/^!unblacklist (.*)$/);
         if(!username===DEVS) return
-        bot.chat(`/unignore ${userToBlacklist[1]}`)
-        bridgeHook.send({
-            content: `Person unblacklisted:`,
+        if(kitselection && kitselection[1]) {
+            bot.chat(`/unignore ${userToBlacklist[1]}`)
+            bridgeHook.send({
+            content: `Person unblacklisted: ${userToBlacklist[1]}`,
             username: `Dev who unblacklisted: ${username}`,
             avatarURL: `https://mc-heads.net/head/${username}`,
             flags: [4096] // thanks diamondFTW!
         })
         bot.chat(`/w ${userToBlacklist[1]} You have been unblacklisted by: ${username}`)
+        }
     })
 }
