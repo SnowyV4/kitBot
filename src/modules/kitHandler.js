@@ -34,7 +34,10 @@ const kitPos = {
     "cpvp": new Vec3(9649417, 63, -29737100),
     "trident": new Vec3(9649417, 63, -29737101),
     "obby": new Vec3(9649417, 63, -29737102),
-    "quartz": new Vec3(9649417, 64, -29737102)
+    "quartz": new Vec3(9649417, 64, -29737102),
+    "pearls": new Vec3(9649417, 64, -29737101),
+    "terracotta": new Vec3(9649417, 64, -29737100),
+    "stonebricks": new Vec3(9649421, 64, -29737098)
 }
 
 const blacklisted = [
@@ -50,6 +53,37 @@ const DEV = [
     'ItzFezy', //fezy
     '0comment' //snowy/0comment
 ]
+
+async function kitHandling(pos, shulker, user, bott) {
+    try {
+        if (running === true) {
+            bott.chat(`/w ${user} bot is busy right now!`)
+            return
+        }
+        const fileContents = fs.readFileSync(filePath, { encoding: encoding });
+        const lines = fileContents.split('\n');
+        for (const line of lines) {
+            const num = parseInt(fileContents)
+            const written = num + 1
+            const text = written.toString()
+            fs.writeFile(filePath, text, (err) => {
+                if (err) console.log(err);
+            })
+        }
+        running = true;
+        usernamee = user
+        const chest = await bott.openContainer(bott.blockAt(pos));
+        await chest.withdraw(shulker, 0, 1);
+        await chest.close
+        console.log(`${user} has used the command!`)
+        bott.chat('/tpa ' + user)
+    }
+    catch(err) {
+        console.log(err)
+        bott.chat(`${user} There was an error! Please try again in a second!`)
+    }
+}
+
 let running = false;
 module.exports = (bot) => {
     let usernamee
@@ -57,27 +91,7 @@ module.exports = (bot) => {
     bot.on('chat', async(username, message) => {
         const kitselection = message.match(/^!kit (.*)$/);
         if(message==='!kit') {
-            if (running === true) {
-                bot.chat(`/w ${username} bot is busy right now!`)
-                return
-            }
-            const fileContents = fs.readFileSync(filePath, { encoding: encoding });
-            const lines = fileContents.split('\n');
-            for (const line of lines) {
-                const num = parseInt(fileContents)
-                const written = num + 1
-                const text = written.toString()
-                fs.writeFile(filePath, text, (err) => {
-                    if (err) throw err;
-                })
-            }
-            running = true;
-            usernamee = username
-            const chest = await bot.openContainer(bot.blockAt(kitPos.pvp));
-            await chest.withdraw(bot.registry.itemsByName.lime_shulker_box?.id, 0, 1);
-            await chest.close
-            console.log(`${username} has used the command!`)
-            bot.chat('/tpa ' + username)
+            kitHandling(kitPos.pvp, bot.registry.itemsByName.lime_shulker_box.id, username, bot)
         }
         if(kitselection && kitselection[1]) {
             console.log(`${username} has used kit: ${kitselection[1]}`)
@@ -86,289 +100,79 @@ module.exports = (bot) => {
                 return
             };
             if(kitselection[1]==='construction') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.construction));
-                await chest.withdraw(bot.registry.itemsByName.magenta_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)    
+                kitHandling(kitPos.construction, bot.registry.itemsByName.magenta_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='pvp') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.pvp));
-                await chest.withdraw(bot.registry.itemsByName.lime_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.pvp, bot.registry.itemsByName.lime_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='fireworks') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.fireworks));
-                await chest.withdraw(bot.registry.itemsByName.blue_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.fireworks, bot.registry.itemsByName.blue_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='wither') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.wither));
-                await chest.withdraw(bot.registry.itemsByName.red_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.wither, bot.registry.itemsByName.red_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='concrete') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.concrete));
-                await chest.withdraw(bot.registry.itemsByName.gray_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.fireworks, bot.registry.itemsByName.gray_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='ores' || kitselection[1]==='ore') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.ores));
-                await chest.withdraw(bot.registry.itemsByName.yellow_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.fireworks, bot.registry.itemsByName.yellow_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='signs' || kitselection[1]==='sign') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.signs));
-                await chest.withdraw(bot.registry.itemsByName.light_gray_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.signs, bot.registry.itemsByName.light_gray_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='totems' || kitselection[1]==='totem') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.totems));
-                await chest.withdraw(bot.registry.itemsByName.light_gray_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.totems, bot.registry.itemsByName.light_gray_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='grass') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.grass));
-                await chest.withdraw(bot.registry.itemsByName.lime_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.grass, bot.registry.itemsByName.lime_shulker_box.id, username, bot)
             }
-            if(kitselection[1]==='beacon' || kitselection[1]==='beacon') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.beacon));
-                await chest.withdraw(bot.registry.itemsByName.black_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+            if(kitselection[1]==='beacon' || kitselection[1]==='beacon') { 
+                kitHandling(kitPos.beacon, bot.registry.itemsByName.black_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='grief' || kitselection[1]==='tnt') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.grief));
-                await chest.withdraw(bot.registry.itemsByName.red_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.grief, bot.registry.itemsByName.red_shulker_box.id, username, bot)
             }
-            if(kitselection[1]==='storage') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.storage));
-                await chest.withdraw(bot.registry.itemsByName.orange_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+            if(kitselection[1]==='storage' || kitselection[1]==='stash') {
+                kitHandling(kitPos.storage, bot.registry.itemsByName.orange_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='building') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.building));
-                await chest.withdraw(bot.registry.itemsByName.white_shulker_box?.id, 0, 1);
-                await chest.close
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.building, bot.registry.itemsByName.white_shulker_box.id, username, bot)
             }
-            if(kitselection[1]==='elytra') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.elytra));
-                await chest.withdraw(bot.registry.itemsByName.red_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+            if(kitselection[1]==='elytra' || kitselection[1]==='elytras') {
+                kitHandling(kitPos.elytra, bot.registry.itemsByName.red_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='gaps' || kitselection[1]==='food') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.gaps));
-                await chest.withdraw(bot.registry.itemsByName.red_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.gaps, bot.registry.itemsByName.red_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='dyes') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.dyes));
-                await chest.withdraw(bot.registry.itemsByName.magenta_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.dyes, bot.registry.itemsByName.magenta_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='light' || kitselection[1]==='lighting') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.light));
-                await chest.withdraw(bot.registry.itemsByName.shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.light, bot.registry.itemsByName.shulker_box.id, username, bot)
             }
             if(kitselection[1]==='netherite') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.netherite));
-                await chest.withdraw(bot.registry.itemsByName.blue_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.netherite, bot.registry.itemsByName.blue_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='cpvp' || kitselection[1]==='refill') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.cpvp));
-                await chest.withdraw(bot.registry.itemsByName.orange_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.cpvp, bot.registry.itemsByName.orange_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='trident' || kitselection[1]==='tridents') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.trident));
-                await chest.withdraw(bot.registry.itemsByName.black_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.trident, bot.registry.itemsByName.black_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='obby' || kitselection[1]==='obsidian') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.obby));
-                await chest.withdraw(bot.registry.itemsByName.black_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.obby, bot.registry.itemsByName.black_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='quartz') {
-                if (running === true) {
-                    bot.chat(`/w ${username} bot is busy right now!`)
-                    return
-                }
-                running = true;
-                usernamee = username
-                const chest = await bot.openContainer(bot.blockAt(kitPos.quartz));
-                await chest.withdraw(bot.registry.itemsByName.magenta_shulker_box?.id, 0, 1);
-                await chest.close
-                console.log(`${username} has used the command!`)
-                bot.chat('/tpa ' + username)
+                kitHandling(kitPos.quartz, bot.registry.itemsByName.magenta_shulker_box.id, username, bot)
+            }
+            if(kitselection[1]==='pearls') {
+                kitHandling(kitPos.pearls, bot.registry.itemsByName.lime_shulker_box.id, username, bot)
+            }
+            if(kitselection[1]==='terracotta') {
+                kitHandling(kitPos.terracotta, bot.registry.itemsByName.magenta_shulker_box.id, username, bot)
+            }
+            if(kitselection[1]==='stone-bricks') {
+                kitHandling(kitPos.stonebricks, bot.registry.itemsByName.light_gray_shulker_box.id, username, bot)
             }
         }
     })
