@@ -56,10 +56,6 @@ const DEV = [
 
 async function kitHandling(pos, shulker, user, bott) {
     try {
-        if (running === true) {
-            bott.chat(`/w ${user} bot is busy right now!`)
-            return
-        }
         const fileContents = fs.readFileSync(filePath, { encoding: encoding });
         const lines = fileContents.split('\n');
         for (const line of lines) {
@@ -70,7 +66,6 @@ async function kitHandling(pos, shulker, user, bott) {
                 if (err) console.log(err);
             })
         }
-        running = true;
         usernamee = user
         const chest = await bott.openContainer(bott.blockAt(pos));
         await chest.withdraw(shulker, 0, 1);
@@ -83,10 +78,8 @@ async function kitHandling(pos, shulker, user, bott) {
         bott.chat(`${user} There was an error! Please try again in a second!`)
     }
 }
-
-let running = false;
+let usernamee
 module.exports = (bot) => {
-    let usernamee
     //handling kit commands
     bot.on('chat', async(username, message) => {
         const kitselection = message.match(/^!kit (.*)$/);
@@ -199,20 +192,9 @@ module.exports = (bot) => {
                 bot.chat('/kill')
                 await sleep(50)
                 bot.chat(`/w ${usernamee} Thanks for using 8bKits! Please check out our discord and enjoy the kit! https://discord.gg/fTE7wzvBnv`)
-                running = false;
             }
         }
     }})
-    //handling the tp timeout
-    bot.on('chat', async(username, message) => {
-        if(username==='8b8tCore') {
-            if(message==='>> TPA Request timed out') {
-                running = false;
-            }
-            if(message.includes('>> TPA cancelled because')) {
-                running = false;
-            }
-        }
-    });
+    //handling the tp timeou
     //handling tps
 }
