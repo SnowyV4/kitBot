@@ -84,7 +84,19 @@ client.on('interactionCreate', (interaction) => {
       interaction.reply('Bot contains something related to a TP!')
       return
     }
+    if(name.includes('/tpy')) {
+      interaction.reply('Bot contains something related to a TP!')
+      return
+    }
     if(name.includes('/tpayes')) {
+      interaction.reply('Bot contains something related to a TP!')
+      return
+    }
+    if(name.includes('/tpaaccept')) {
+      interaction.reply('Bot contains something related to a TP!')
+      return
+    }
+    if(name.includes('/tpadeny')) {
       interaction.reply('Bot contains something related to a TP!')
       return
     }
