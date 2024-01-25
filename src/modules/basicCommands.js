@@ -54,7 +54,7 @@ module.exports = (bot) => {
       bot.chat(`/w ${username} cpvp/refill, trident, obsidian, pearls, terracotta, stone-bricks`)
     };
     if(prefixes.includes(command)) {
-      bot.chat(`> The current commands are: !list, !kit, !prefixes, !credits, !server, !info, !suggest`)
+      bot.chat(`> The current commands are: !list, !kit, !prefixes, !credits, !server, !info, !suggest, !uses`)
     };
     if(kitselection && kitselection[1]) {
       bridgeHook.send({
