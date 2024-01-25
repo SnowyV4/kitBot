@@ -75,7 +75,7 @@ async function kitHandling(pos, shulker, user, bott) {
     }
     catch(err) {
         console.log(err)
-        bott.chat(`${user} There was an error! Please try again in a second!`)
+        bott.chat(`/w ${user} There was an error! Please try again in a second!`)
     }
 }
 let usernamee
