@@ -16,7 +16,7 @@ module.exports = (bot) => {
     bot.on('chat', async(username, message) => {
         const userToBlacklist = message.match(/^!blacklist (.*)$/);
         if(!username===DEVS) return
-        if(kitselection && kitselection[1]) {
+        if(userToBlacklist && userToBlacklist[1]) {
             bot.chat(`/ignore ${userToBlacklist[1]}`)
             bridgeHook.send({
             content: `Person blacklisted: ${userToBlacklist[1]}`,
@@ -30,7 +30,7 @@ module.exports = (bot) => {
     bot.on('chat', async(username, message) => {
         const userToBlacklist = message.match(/^!unblacklist (.*)$/);
         if(!username===DEVS) return
-        if(kitselection && kitselection[1]) {
+        if(userToBlacklist && userToBlacklist[1]) {
             bot.chat(`/unignore ${userToBlacklist[1]}`)
             bridgeHook.send({
             content: `Person unblacklisted: ${userToBlacklist[1]}`,
