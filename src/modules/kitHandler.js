@@ -84,7 +84,7 @@ module.exports = (bot) => {
     bot.on('chat', async(username, message) => {
         const kitselection = message.match(/^!kit (.*)$/);
         if(message==='!kit') {
-            kitHandling(kitPos.pvp, bot.registry.itemsByName.lime_shulker_box.id, username, bot)
+            kitHandling(kitPos.pvp, bot.registry.itemsByName.red_shulker_box.id, username, bot)
         }
         if(kitselection && kitselection[1]) {
             console.log(`${username} has used kit: ${kitselection[1]}`)
@@ -96,7 +96,7 @@ module.exports = (bot) => {
                 kitHandling(kitPos.construction, bot.registry.itemsByName.magenta_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='pvp') {
-                kitHandling(kitPos.pvp, bot.registry.itemsByName.lime_shulker_box.id, username, bot)
+                kitHandling(kitPos.pvp, bot.registry.itemsByName.red_shulker_box.id, username, bot)
             }
             if(kitselection[1]==='fireworks') {
                 kitHandling(kitPos.fireworks, bot.registry.itemsByName.blue_shulker_box.id, username, bot)
