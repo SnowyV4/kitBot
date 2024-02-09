@@ -1,6 +1,6 @@
 const mineflayer = require("mineflayer");
 const {WebhookClient} = require('discord.js');
-const bridgeHook = new WebhookClient({ url: 'https://discord.com/api/webhooks/1198066418885861446/fdLCr5PmPR_lCg2fNweUU_wAzjfgGuSqmEzMI5-YF-c27GVEr2iu-ng3YrayKNs9QDbe' });
+const bridgeHook = new WebhookClient({ url: '' });
 const fs = require('fs'); 
 const filePath = './uses.txt'; 
 const encoding = 'utf8'; 
