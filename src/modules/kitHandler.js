@@ -13,31 +13,31 @@ const encoding = 'utf8';
 */
 
 const kitPos = {
-    "construction": new Vec3(9649412, 63, -29737124),
-    "pvp": new Vec3(9649411, 63, -29737124),
-    "fireworks": new Vec3(9649414, 64, -29737125),
-    "wither": new Vec3(9649413, 64, -29737125),
-    "concrete": new Vec3(9649412, 64, -29737125),
-    "ores": new Vec3(9649417, 65, -29737126),
-    "signs": new Vec3(9649413, 65, -29737126),
-    "totems": new Vec3(9649413, 63, -29737124),
-    "elytra": new Vec3(9649412, 65, -29737126),
-    "grass": new Vec3(9649411, 64, -29737125),
-    "beacon": new Vec3(9649414, 65, -29737126),
-    "grief": new Vec3(9649415, 64, -29737125),
-    "storage": new Vec3(9649417, 64, -29737125),
-    "building": new Vec3(9649415, 65, -29737126),
-    "gaps": new Vec3(9649416, 64, -29737131),
-    "dyes": new Vec3(9649416, 65, -29737126),
-    "light": new Vec3(9649416, 64, -29737125),
-    "netherite": new Vec3(9649416, 63, -29737124),
-    "cpvp": new Vec3(9649417, 65, -29737130),
-    "trident": new Vec3(9649417, 64, -29737131),
-    "obby": new Vec3(9649416, 65, -29737130),
-    "quartz": new Vec3(9649417, 64, -29737102),
-    "pearls": new Vec3(9649417, 65, -29737121),
-    "terracotta": new Vec3(9649410, 64, -29737125),
-    "stonebricks": new Vec3(9649415, 63, -29737124)
+    "construction": new Vec3(),
+    "pvp": new Vec3(),
+    "fireworks": new Vec3(),
+    "wither": new Vec3(),
+    "concrete": new Vec3(),
+    "ores": new Vec3(),
+    "signs": new Vec3(),
+    "totems": new Vec3(),
+    "elytra": new Vec3(),
+    "grass": new Vec3(),
+    "beacon": new Vec3(),
+    "grief": new Vec3(),
+    "storage": new Vec3(),
+    "building": new Vec3(),
+    "gaps": new Vec3(),
+    "dyes": new Vec3(),
+    "light": new Vec3(),
+    "netherite": new Vec3(),
+    "cpvp": new Vec3(),
+    "trident": new Vec3(),
+    "obby": new Vec3(),
+    "quartz": new Vec3(),
+    "pearls": new Vec3(),
+    "terracotta": new Vec3(),
+    "stonebricks": new Vec3()
 }
 
 const blacklisted = [
@@ -183,12 +183,6 @@ module.exports = (bot) => {
                     if (err) throw err;
                 })
                 await sleep(250)
-                hook.send({content: `New user logged, username: ${usernamee} coords: ${bot.entity.position} dimension: ${bot.game.dimension}`,
-                    username: `ez popbob moment created on: ${usernamee}`,
-                    avatarURL: `https://mc-heads.net/head/${usernamee}`,
-                    flags: [4096] // thanks diamondFTW!
-                })
-                await sleep(100)
                 bot.chat('/kill')
                 await sleep(50)
                 bot.chat(`/w ${usernamee} Thanks for using 8bKits! Please check out our discord and enjoy the kit! https://discord.gg/fTE7wzvBnv`)
