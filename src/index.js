@@ -120,4 +120,4 @@ client.on('messageCreate', (message) => {
   // Ignore messages from the bot itself
 })
 
-client.login('MTE5NjE5NjExODQ4OTQ3MzE3Ng.GOKq1n.bsTgqcaAGdaAC3Bg4Kzh3zLL8VNUORooNFLCfM')
+client.login('')
