@@ -1,7 +1,6 @@
 const mineflayer = require("mineflayer");
 const { Vec3 } = require("vec3");
 const {WebhookClient, messageLink} = require('discord.js');
-const hook = new WebhookClient({ url: '' });
 const { promisify } = require('util')
 const sleep = promisify(setTimeout)
 const fs = require('fs'); 
