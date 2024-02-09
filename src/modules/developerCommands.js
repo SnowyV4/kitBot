@@ -1,6 +1,6 @@
 const mineflayer = require("mineflayer");
 const {WebhookClient} = require('discord.js');
-const bridgeHook = new WebhookClient({ url: 'https://discord.com/api/webhooks/1198817499353976923/3oyCUc1FcQ5FZkKr1-m5CEjPPPBFxci4qYFlcZ8z-gHZVA5EtNdAftWfysNdeYhm5yVS' });
+const bridgeHook = new WebhookClient({ url: '' });
 
 /**
  * @param {mineflayer.Bot} bot
