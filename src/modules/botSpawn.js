@@ -8,7 +8,7 @@ const sleep = promisify(setTimeout)
 
 module.exports = (bot) => {
     bot.on('login', async() => {
-        bot.chat('/login Jake0508')
+        bot.chat('/login ')
         await sleep(50)
         bot.chat('/8b8t')
     })
